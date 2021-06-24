@@ -29,17 +29,23 @@ function addRoom(){
 }
 
 function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("output").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
-       var Room_names = childKey;
-      //Start code
-        console.log("Room name: "+Room_names);
-        var row = "<div class='room_name' id="+Room_names+" onclick= 'redirectToRoomName(this.id)'>#"+Room_names+"</div> <hr>";
-        document.getElementById("output").innerHTML += row;
-      //End code
-      });});}
+  var Room_names = childKey;
+ //Start code
+   console.log("Room name: "+Room_names);
+   var row = "<div class='room_name' id="+Room_names+" onclick= 'redirectToRoomName(this.id)'>#"+Room_names+"</div> <hr>";
+   document.getElementById("output").innerHTML += row;
+ //End code
+ });});}
 getData();
 
 function redirectToRoomName(name){
   console.log(name);
   localStorage.setItem("RoomName", name);
   window.location = "kwitter_page.html";
+}
+
+function logout(){
+  localStorage.removeItem("user_name");
+  localStorage.removeItem("RoomName");
+  window.location = "index.html";
 }
